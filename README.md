@@ -1,5 +1,9 @@
 # Leitor RFID RC522 com Arduino: Leitura de UID de Chaves, Controle de Acesso com LEDs e Servo Motor
-
+## Integrantes:
+- Guilherme Santiago Da Silva -RM552321
+- Gabriel Borba - RM553187
+- Gustavo Gouvêa Soares - RM553842 
+- Pedro Henrique Mello Silva Alves - RM554223
 ## 1. Introdução
 
 Este documento fornece um guia completo para utilizar o módulo leitor RFID RC522 com um Arduino, focando na leitura do UID (Unique Identifier) de cartões e tags RFID, na implementação de um sistema básico de controle de acesso visualizado por LEDs e na atuação de um servo motor. O RFID (Radio-Frequency Identification) é uma tecnologia que utiliza campos eletromagnéticos para identificar automaticamente e rastrear tags anexadas a objetos. O módulo RC522 é um leitor/gravador de RFID de baixo custo e amplamente utilizado em projetos com microcontroladores como o Arduino.
