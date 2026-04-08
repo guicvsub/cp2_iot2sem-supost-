@@ -25,20 +25,33 @@ Para replicar este projeto, você precisará dos seguintes componentes:
 
 O módulo RC522 comunica-se com o Arduino através da interface SPI (Serial Peripheral Interface). Os LEDs e o servo motor são conectados a pinos digitais separados. As conexões são as seguintes:
 
-| Pino RC522 | Pino Arduino Uno | Descrição                               |
-| :--------- | :--------------- | :-------------------------------------- |
-| VCC        | 3.3V             | Alimentação (3.3V)                      |
-| RST        | D9               | Reset                                   |
-| GND        | GND              | Terra                                   |
-| MISO       | D12              | Master In Slave Out (SPI)               |
-| MOSI       | D11              | Master Out Slave In (SPI)               |
-| SCK        | D13              | Serial Clock (SPI)                      |
-| SDA (SS)   | D10              | Slave Select (SPI)                      |
-| **LED Verde** | D7               | Acesso Permitido (com resistor de 220Ω) |
-| **LED Vermelho**| D6               | Acesso Negado (com resistor de 220Ω)    |
-| **Servo Motor** | D5               | Sinal de controle do Servo Motor        |
+### Pinout do Módulo RFID RC522
 
-**Nota:** As portas SPI no Arduino Uno são fixas: D11 (MOSI), D12 (MISO) e D13 (SCK). Os pinos RST e SDA (SS) podem ser configurados para outras portas digitais, mas D9 e D10 são as convenções mais comuns. Os LEDs devem ser conectados com um resistor de 220 Ohm em série para limitar a corrente e protegê-los. O servo motor geralmente tem três fios: um para alimentação (VCC, geralmente 5V), um para terra (GND) e um para o sinal (conectado ao pino D5 neste caso).
+![Pinout do Módulo RFID RC522](https://private-us-east-1.manuscdn.com/sessionFile/0nUCyrruV7I39NLYwJsGCw/sandbox/A8V9iQJ2tNNbT9CqL6toax-images_1775646633512_na1fn_L2hvbWUvdWJ1bnR1L3JmaWRfcmM1MjJfcGlub3V0.jpg?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvMG5VQ3lycnVWN0kzOU5MWXdKc0dDdy9zYW5kYm94L0E4VjlpUUoydE5OYlQ5Q3FMNnRvYXgtaW1hZ2VzXzE3NzU2NDY2MzM1MTJfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzSm1hV1JmY21NMU1qSmZjR2x1YjNWMC5qcGciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Z-4-0zHz-i~y-5viFiY8oPnmO4xt7o8AAc~1fkWAJc~5xO~7oNoiuX-qCFsYChUT-LkLWczj8Gal3bmvBSie5sYMaX20uILcosAhcjqsth74o5Zvs4Md2OFJRvw5F4eRMGRPxgyyFpc2DWbuhH6u7MFS~-pJpCYbJQyQrNgZ7bpqGYDiDSCbUNInL-yMIh7J1e8GXZt1jGK8gv3CiQfe-IwXMaf3JPNM5IQkBfvs0MBdaYHV43eRaFGiXZM3HsU2GTOE541~FDKxkeQt3fuoixR9b-iuVeBvhCqs5anNRTmEZXyci7wZhyHSUfVS-xVkqC9f6qQ3gO6ZW2YRAWww~A__)
+
+| Pino RC522 | Função | Conexão no Arduino Uno |
+| :--------- | :--- | :--------------------- |
+| VCC        | Alimentação (3.3V) | 3.3V                   |
+| RST        | Reset | D9                     |
+| GND        | Terra | GND                    |
+| MISO       | Master In Slave Out (SPI) | D12                    |
+| MOSI       | Master Out Slave In (SPI) | D11                    |
+| SCK        | Serial Clock (SPI) | D13                    |
+| SDA (SS)   | Slave Select (SPI) | D10                    |
+
+**Nota sobre o RC522:** O módulo RC522 funciona estritamente com **3.3V**. Se ligar o pino VCC no 5V do Arduino, poderá danificar o módulo. As portas SPI no Arduino Uno são fixas: D11 (MOSI), D12 (MISO) e D13 (SCK). Os pinos RST e SDA (SS) podem ser configurados para outras portas digitais, mas D9 e D10 são as convenções mais comuns.
+
+### Pinout do Servo Motor (SG90)
+
+![Pinout do Servo Motor SG90](https://private-us-east-1.manuscdn.com/sessionFile/0nUCyrruV7I39NLYwJsGCw/sandbox/A8V9iQJ2tNNbT9CqL6toax-images_1775646633512_na1fn_L2hvbWUvdWJ1bnR1L3NlcnZvX3Bpbm91dA.png?Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvMG5VQ3lycnVWN0kzOU5MWXdKc0dDdy9zYW5kYm94L0E4VjlpUUoydE5OYlQ5Q3FMNnRvYXgtaW1hZ2VzXzE3NzU2NDY2MzM1MTJfbmExZm5fTDJodmJXVXZkV0oxYm5SMUwzTmxjblp2WDNCcGJtOTFkQS5wbmciLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3OTg3NjE2MDB9fX1dfQ__&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=XabjYw4WQ~KR5erlBXJnaa0k9BxjONGrI-vBlHJZCLrEd77InZIJ0EukaITiqLQV9r-~wjcj2WUaji8VLYQHiC5GQKjD3VBjlXLG6EWQOshfcL5WuAG~kY2zcpKN1ohQXqZl5XPpfhVYGoQ47BuVBC4mvyUsvdk5-fbwKooD8IzCEk2McXNjBcppknzo-DpJyi724ilpTXC6tZ0CpQAjcstT8rLIVVaOE7Pk5hYHk1MKw75x29GJFiOxaKbOgcXA3tCrY7a8E4YkpmGUgf0-EfhX-LefpurQKSxH1R4KiIruQj8iMhX8KZlIOzQ91aZvUHJQ-H2lOjUq7F8aNL9U4g__)
+
+| Fio do Servo | Função | Conexão no Arduino Uno |
+| :----------- | :--- | :--------------------- |
+| Marrom/Preto | Terra | GND                    |
+| Vermelho     | Alimentação (5V) | 5V                     |
+| Laranja/Amarelo | Sinal de Controle | D5                     |
+
+**Nota sobre os LEDs:** Os LEDs devem ser conectados com um resistor de 220 Ohm em série para limitar a corrente e protegê-los. O LED Verde está conectado ao pino D7 e o LED Vermelho ao pino D6.
 
 ## 4. Instalação da Biblioteca
 
@@ -179,6 +192,6 @@ Este projeto serve como um sistema básico de controle de acesso. Para aplicaç�
 
 ## 8. Referências
 
-*   [RFID Arduino - Read RFID Tag\'s UID with RC522](https://www.diyengineers.com/2021/04/15/learn-how-to-read-an-rfid-tag-with-rc522-and-arduino/) - DIY Engineers
+*   [RFID Arduino - Read RFID Tag\"s UID with RC522](https://www.diyengineers.com/2021/04/15/learn-how-to-read-an-rfid-tag-with-rc522-and-arduino/) - DIY Engineers
 *   [Interfacing RC522 RFID Module With Arduino](https://www.instructables.com/Interfacing-RC522-RFID-Module-With-Arduino/) - Instructables
 *   [Arduino RFID Tutorial: Complete RC522 Guide with Code](https://circuitdigest.com/microcontroller-projects/interfacing-rfid-reader-module-with-arduino) - Circuit Digest
